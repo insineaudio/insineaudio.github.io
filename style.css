@@ -3,10 +3,104 @@ body {
 	color: #FAF2F2;
 }
 
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 h1 {
+	background-color: #1b1a1a;
 	color: #730E0E;
+
+	display: table;
 }
 
 h2 {
+	background-color: #0D0D0D;
 	color: #800F0F;
+	border-radius: 10px;
+	border-style: solid;
+    border-color: #1b1a1a;
+	display: table;
+	padding: 1%;
+}
+
+input {
+	background-color: #0D0D0D;
+	color: #800F0F;
+	border-radius: 10px;
+	border-style: solid;
+    border-color: #1b1a1a;
+	display: table;
+	padding: 1%;
+}
+
+.button {
+	background-color: #800F0F;
+	color: white;
+	padding: 8px 16px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+  
+.button:hover {
+	background-color: #0D0D0D;
+	color: white;
+}
+
+.p-timer-clock {
+	background-color: #1b1a1a;
+	text-align:left;
+	font-size: 60px;
+	border-radius: 10px;
+	margin-top: 0px;
+	display: table;
+	padding: 1%;
+}
+
+.p-black-background {
+	background-color: #1b1a1a;
+	color: #FAF2F2;
+	border-radius: 10px;
+	display:table;
+	padding: 1%;
+}
+
+.software-section {
+    background-color: #1b1a1a;
+    color: #fff;
+	border-radius: 10px;
+    padding: 20px;
+}
+
+.article-section {
+    background-color: #800F0F;
+    color: #fff;
+	border-radius: 10px;
+    padding: 20px;
+	margin-top: 10px;
+}
+
+.div-red-text {
+	background-color: #161616;
+	color: #800F0F;
+	border-radius: 10px;
+	border-style: solid;
+    border-color: #1b1a1a;
+	display: table;
+	padding: 1%;
+}
+
+footer {
+	background-color: #0D0D0D;
+    color: #fff;
+    padding: 20px;
+    margin: -8px;
+	margin-top: 10px;
 }

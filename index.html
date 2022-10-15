@@ -15,23 +15,58 @@ Some descriptive HTML tags:
 </head>
 <body>
 	<img src="./resources/InSine_Logo.svg" alt="InSine Audio logo" width="600px" height="400px">
-
-	<h1>InSine Audio</h1>
 	<h2>Cool phrase about music tech!</h2>
-	<p>
+	<p class="p-black-background ">
 		InSine will be a great place to learn and evolve audio music production.
 	</p>
-	<section>
+	<section class="software-section">
 		<h2>Software</h2>
 		<p></p>
+		<ul>
+			<li>Synthesizer 1</li>
+			<li>Reverb 1</li>
+			<li>Compressor x</li>
+			<li>Eq Z</li>
+		</ul>
 	</section>
 
-	<section>
+	<section class="article-section">
 		<h2>Articles</h2>
 		<article>
-
+			<ul>
+				<li>Plugin Frameworks</li>
+				<li>Plugin Development</li>
+				<li>Digital Signal Processing for music</li>
+			</ul>
 		</article>
 	</section>
 
+	<section>
+		<script src="scripts/timer.js"></script>
+		<h2>Pomodoro Timer
+			<div id="work-time" class="div-red-text">
+				Work Time:
+				<input id="end_minute_input" type="text" placeholder="25" class="p-black-background"> 
+			</div>
+			<button onclick="setTimer()"   class="button">Set</button>
+			<button onclick="resetTimer()" class="button">Reset</button>
+			<button onclick="pauseTimer()" class="button">Pause</button>
+			<button onclick="startTimer()" class="button">Start</button>
+			<p id="worktimer" class="p-timer-clock"></p>
+
+			<div class="div-red-text">
+				Chill Time:
+				<input id="end_minute_input2" type="text" placeholder="5" class="p-black-background"> 
+			</div>
+			<button onclick="setChillTimer()"   class="button">Set</button>
+			<button onclick="startChillTimer()" class="button">Start</button>
+			<p id="chilltimer" class="p-timer-clock"></p>
+			
+		</h2>
+	</section>
+
 </body>
+
+<footer> Footer </footer>
 </html>
+
