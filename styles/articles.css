@@ -1,0 +1,40 @@
+:root {
+    --width: 300px;
+    --background: #262626;
+    --text-color: #F2F2F2;
+}
+
+* {
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background);
+    display: flex;
+    min-width: 10px;
+    font-size: 50px;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.sinetitle {
+    background-color: var(--background);
+    color: var(--text-color);
+    width: var(--width);
+    height: 400px;
+}
+
+.draw {
+    background-color: var(--background);
+    color: var(--text-color);
+    width: var(--width);
+    height: 400px;
+}
+
+div {
+    overflow: hidden;
+}
+p {
+    text-align: center;
+}

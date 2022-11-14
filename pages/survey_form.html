@@ -1,0 +1,51 @@
+<DOCTYPE! html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InSine Survey</title>
+    <link rel="stylesheet" href="../styles/survey_form.css">
+  <head>
+
+  <body>
+    <h1 id="title">InSine Survey</h1>
+    <p id="description">Thank you for taking the time to help us improve the platform</p>
+
+    <form id="survey-form">
+      <fieldset>
+        <label id="name-label" for="name">Name: <input id="name" type="text" placeholder="First name" required></label>
+        <label id="email-label" for="email">Email: <input id="email" type="email" placeholder="Best email" required></label>
+        <label id="number-label" for="number">Age: <input id="number" type="number" min="13" max="150" placeholder="21" required></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>What do you think we do best?</legend>
+        <select id="dropdown">
+          <option>(subject)</option>
+          <option>Articles</option>
+          <option>Software</option>
+          <option>Tutorials</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>What your role?</legend>
+        <label id="student-label" for="student"><input id="student" type="radio" name="account-type" value="student" class="inline"/> Student</label>
+        <label id="developer-label" for="developer"><input id="developer" type="radio" name="account-type" value="developer" class="inline" /> Developer</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>What we should improve?</legend>
+        <label for="loving"><input id="articles"  type="checkbox" name="plugin" value="articles" class="inline" checked> Articles</label>
+        <label for="lazy"><input id="software"  type="checkbox" name="plugin" value="software" class="inline"> Software</label>
+        <label for="energetic"><input id="tutorials" type="checkbox" name="plugin" value="tutorials" class="inline"> Tutorials</label>
+        
+        <label for="more">Detail:
+          <textarea id="more" name="more" rows="3" cols="30" placeholder="We should improve ..."></textarea>
+        </label>
+      </fieldset>
+      
+      <input id="submit" type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

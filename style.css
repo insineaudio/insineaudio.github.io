@@ -1,12 +1,81 @@
+:root {
+    --width: 300px;
+    --background: #201F1F;
+    --text-color: #F2F2F2;
+}
+
+
+* {
+	/* border: 1px solid black; */
+    /* box-sizing: border-box; */
+}
+
+header {
+	background-color: var(--background);
+	display: flex;
+}
+
+nav {
+	background-color: var(--background);
+	font-size: 30px;
+	padding-top: calc(100px - 1em);
+	padding-bottom: calc(100px - 1em);
+	width: 25em;
+	display: flex;
+}
+
+a {
+	background-color: var(--background);
+	display: flex;
+	margin: auto;
+
+	padding-left: 30px;
+	padding-right: 30px;
+	border-radius: 25px;
+	color: var(--text-color);
+	text-decoration: none;
+	justify-content: center;
+}
+
+
+a:hover {
+	background-color: #484343;
+}
+
+a:hover .nav-icon {
+	filter: brightness(0) saturate(100%) invert(13%) sepia(31%) saturate(6527%) hue-rotate(349deg) brightness(87%) contrast(100%);
+}
+
+.s-icon, .home-icon, .article-icon {
+	width: 2rem;
+	height: 2rem;
+	margin: auto;
+	margin-right: 10px;
+}
+
+.s-icon {
+	color: #730E0E;
+	margin-right:  0;
+}
+
+.red-head-footer {
+	width: auto;
+	height: 20px;
+	background-color: #730E0E;
+}
+
 body {
-	background-color: #201F1F;
+	background-color: #484343;
 	color: #FAF2F2;
+	font-family: monospace;
+	font-size: large;
 }
 
 img {
 	display: block;
-	margin-left: auto;
 	margin-right: auto;
+	width: 300px;
+	height: 200px;
 }
 
 h1 {
@@ -19,7 +88,7 @@ h1 {
 h2 {
 	background-color: #0D0D0D;
 	color: #800F0F;
-	border-radius: 10px;
+	border-radius: 25px;
 	border-style: solid;
     border-color: #1b1a1a;
 	display: table;
@@ -72,25 +141,25 @@ input {
 	padding: 1%;
 }
 
+section {
+	margin-top: 30px;
+}
+
 .software-section {
-    background-color: #1b1a1a;
+    background-color: var(--background);
     color: #fff;
-	border-radius: 10px;
     padding: 20px;
 }
 
 .article-section {
-    background-color: #800F0F;
+    background-color: var(--background);
     color: #fff;
-	border-radius: 10px;
     padding: 20px;
-	margin-top: 10px;
 }
 
 .div-red-text {
 	background-color: #161616;
 	color: #800F0F;
-	border-radius: 10px;
 	border-style: solid;
     border-color: #1b1a1a;
 	display: table;
