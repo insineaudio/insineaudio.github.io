@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <!-- Article title -->
+        <title>Title</title>
+        <link rel="stylesheet" href="../styles/Juce_Basics.css"/>
+
+    </head>
+    <body>
+        <header>
+            <h1>Basic Plugin Tutorial Part-1</h1>
+        </header>
+        <nav id="navbar">
+            <ul>
+                <li><a href="#intro" class="nav-link">Introduction</a></li> 
+                <li><a href="#creatingtheproject" class="nav-link">Creating the project</a></li> 
+                <li><a href="#themainfunction" class="nav-link">The main function in JUCE</a></li>
+                <li><a href="#juceappbase" class="nav-link">JUCE Application Base</a></li> 
+                <li><a href="#helloworld" class="nav-link">Classic Hello world</a></li>
+                <li><a href="#gui" class="nav-link">GUI</a></li>
+            </ul>
+        </nav>
+        <main spellcheck="true">
+            <section id="intro" class="main-section">
+                <h2>Introduction</h2>
+                <p>
+                    For this experiment you will need to setup JUCE and your favorite development enviroment
+                    (<a href="https://docs.juce.com/master/tutorial_new_projucer_project.html" target="_blank">Getting started with the Projucer</a>). 
+                    I'm going to use Visual Studio. We are going to create a simple plugin, starting with a blank project. Our goal is to better understand 
+                    the "Basic Plugin" template, from Projucer.
+                </p>
+                <p>
+                    We are going to start with a JUCE Gui application, and then change the Projucer project to a Plugin project.
+                </p>
+            </section>
+            <section id="creatingtheproject" class="main-section">
+                <h2>Creating the project</h2>
+                <p>
+                    Open the Projucer > New Project > Application > Blank.<br>
+                    Then give it the project name, a will name it "BasicPlugin".<br>
+                    Expand the modules tab, we can see that a few modules are checked.<br>
+                    Check if the modules path are correct. <br>
+                    Select your exporter and create the project. <br>
+                </p>
+                <div class="image-wrapper">
+                    <img src="../resources/JUCE_Basics_Resources/Creating_the_project.png" alt="">
+                </div>
+                
+                <p>
+                    Take a look on the project's folder that was created, we have our JUCER file that receives the project name you chose 
+                    , and three folders (Source, JuceLibraryCode and Builds).
+                </p>
+                <div class="image-wrapper">
+                    <img src="../resources/JUCE_Basics_Resources/BasicPluginFolder.png" alt="">
+                </div>
+                <p>
+                    And Projucer looks like this
+                </p>
+                <div class="image-wrapper">
+                    <img src="../resources/JUCE_Basics_Resources/ProjucerBasicPluginFile.png" alt="">
+                </div>
+            </section>
+            <section id="themainfunction">
+                <h2>The main function in JUCE</h2>
+                <p>
+                    Let's create a new file: <br>
+                    <ul>
+                        <li>Make sure to expand the file explorer</li>
+                        <li>Right click on Source folder (called Group in Projucer)</li>
+                        <li>Then, select "Add New CPP File"</li>
+                        <li>Give it a name, in my case I will give the name "Main"</li>
+                        <li>Go to File > Save Project or use shortcut "ctrl + p"</li>
+                    </ul>
+                    An empty .cpp file will be created on Source folder, take a look at the project's folder.<br>
+                    Now, we open our selected exporter, in this case within Projucer. I will open Visual Studio.<br><br>
+                    The "Blank" template, creates a blank JUCE GUI application.<br>
+                    Replace the "#include"
+    <div class="code-wrapper">
+    <pre>
+    <code class="cpp">
+    <span class="keyword">#include</span> <span class="include">"Main.h"</span> <span class="comment">// delete this</span>
+    <span class="keyword">#include</span> <span class="include">&lt;JuceHeader.h&gt;</span> <span class="comment">// Replace for this</span>
+    </code>
+    </pre>
+    </div>
+                    To start our JUCE GUI application (not a plugin yet) we need to use a macro "START_JUCE_APPLICATION()"
+    <div class="code-wrapper">
+    <pre>
+    <code class="cpp">
+    <span class="keyword">#include</span> <span class="include">&lt;JuceHeader.h&gt;</span>
+
+    <span class="macro">START_JUCE_APPLICATION</span>() <span class="comment">// this will active spellcheck, because needs an argument.</span>
+    </code>
+    </pre>
+    </div>
+                    <p>You can jump to definition (ctrl + left click on the macro) where the macro is defined</p>
+                    <div class="image-wrapper">
+                        <label for=""><img src="../resources/JUCE_Basics_Resources/JumpToDefinitionMacro.png" alt=""><br>juce_Initialisation.h</label>
+                    </div>
+                    <p>We can see another definition that looks like where the main function resides</p>
+                    <div class="image-wrapper">
+                        <label for=""></label><img src="../resources/JUCE_Basics_Resources/JumpToDefinitionMacro2.png" alt=""><br>juce_Initialisation.h</label>
+                    </div>
+                    <p>
+                        Yep, looks like we are returning something like a main function. A method of class called JUCEApplicationBase <br>
+                        Let's jump one more time on that class ...
+                    </p>
+                    <p>
+                        Now we can see how the class is defined, many comments to read at this point, and the main() function with a comment above saying that it is for    
+                        internal use only, we are going to stop diving on JUCE intrinsics for now.
+                    </p>
+                </p>
+            </section>
+            <section id="juceappbase">
+                <h2>The JUCE Application Base Class</h2>
+                <p>
+                    This first big comment above the class definition, it is exactly the same of the 
+                    <a href="https://docs.juce.com/master/classJUCEApplicationBase.html#details" target="_blank">detailed description</a> of this class on the documentation.<br>
+                    <br>
+                    "Any application that wants to run an event loop must declare a subclass of <br>
+                    JUCEApplicationBase, and implement its various pure virtual methods.        <br>
+                    <br>
+                    It then needs to use the START_JUCE_APPLICATION macro somewhere in a CPP file <br>
+                    to declare an instance of this class and generate suitable platform-specific <br>
+                    boilerplate code to launch the app." <br> <br>
+                </p>
+                <p>
+                    Let's create our class named "App" that inherits from JUCEApplicationBase class, and pass it to the macro argument
+                </p>
+    <p> 
+    <div class="code-wrapper">
+    <pre>
+    <code class="cpp">
+    <span class="keyword">#include</span> <span class="include">&lt;JuceHeader.h&gt;</span>
+
+    <span class="keyword">class</span> <span class="class">App</span> : juce::<span class="function">JUCEApplicationBase</span>
+    {   
+    <span class="keyword">public</span>:
+        &nbsp;<span class="function">App</span>() {}
+        
+    <span class="keyword">private</span>:
+    };
+
+    <span class="macro">START_JUCE_APPLICATION</span>(<span class="class">App</span>) <span class="comment">// this will active spellcheck, because we need to </span>
+                                <span class="comment">// implement all virtual methods of the base class </span>
+    </code>
+    </pre>
+    </div>
+    </p>
+                <p>
+                    As it is an abstract class we must implement all virtual methods.
+                </p>
+    <p> 
+    <div class="code-wrapper">
+    <pre>
+    <code class="cpp">
+    <span class="keyword">#include</span> <span class="include">&lt;JuceHeader.h&gt;</span>
+
+    <span class="keyword">class</span> <span class="class">App</span> : juce::<span class="class">JUCEApplicationBase</span>
+    {   
+    <span class="keyword">public</span>:
+        &nbsp;<span class="function">App</span>() {}
+
+        &nbsp;<span class="keyword">const</span> juce::<span class="class">String</span> <span class="function">getApplicationName</span>() <span class="keyword">override</span> { <span class="keyword">return</span> ProjectInfo::projectName; }
+        &nbsp;<span class="keyword">const</span> juce::<span class="class">String</span> <span class="function">getApplicationVersion</span>() <span class="keyword">override</span> { <span class="keyword">return</span> ProjectInfo::projectversionString; }
+        &nbsp;<span class="keyword">bool</span> <span class="function">moreThanOneInstanceAllowed</span>() <span class="keyword">override</span> { <span class="keyword">return</span> true; }
+
+        &nbsp;<span class="keyword">void</span> <span class="function">initialise</span>(<span class="keyword">const</span> juce::<span class="class">String</span>&amp; commandLine) <span class="keyword">override</span> {  }
+        &nbsp;<span class="keyword">void</span> <span class="function">shutdown</span>() <span class="keyword">override</span> {  }
+        &nbsp;<span class="keyword">void</span> <span class="function">systemRequestedQuit</span>() <span class="keyword">override</span> {  }
+        &nbsp;<span class="keyword">void</span> <span class="function">anotherInstanceStarted</span>(<span class="keyword">const</span> juce::<span class="class">String</span>&amp; commandLine) <span class="keyword">override</span> {  }
+        &nbsp;<span class="keyword">void</span> <span class="function">suspended</span>() <span class="keyword">override</span> {  }
+        &nbsp;<span class="keyword">void</span> <span class="function">resumed</span>() <span class="keyword">override</span> {  }
+        &nbsp;<span class="keyword">void</span> <span class="function">unhandledException</span>(<span class="keyword">const</span> std::<span class="class">exception</span>*, 
+                                 <span class="keyword">const</span> juce::<span class="class">String</span>&amp; commandLine,
+                                 <span class="keyword">int</span> lineNumber) <span class="keyword">override</span> {  }
+
+    <span class="keyword">private</span>:
+    };
+
+    <span class="macro">START_JUCE_APPLICATION</span>(<span class="class">App</span>)
+    </code>
+    </pre>
+    </div>
+    </p>
+
+            <p>
+                Right now, we can run our application. <br>
+                It is only a background process, a infinite loop that drives the operation of the application, open your task manager and search for the BasicPlugin Process, or after compilation and build, look for the binary on the projects folder, 
+                but make sure to end the task in the task manager. <br>                
+            </p>
+            </section>
+            <section id="helloworld">
+                <h2>Classic Hello World!</h2>
+                <p>
+                    The initialise method is called when the application starts. After this method returns, the normal event-dispatch loop will be run. (see JUCE documentation)<br>
+                    
+                    Let's print "Hello World!" on the console. We are going to use the writeToLog method of the juce::Logger helper class for this job.
+                </p>
+    <p> 
+    <div class="code-wrapper">
+    <pre>
+    <code class="cpp">
+    &nbsp;<span class="keyword">void</span> <span class="function">initialise</span>(<span class="keyword">const</span> juce::<span class="class">String</span>&amp; commandLine) <span class="keyword">override</span> 
+     {
+        juce::<span class="class">Logger</span>::<span class="function">writeToLog</span>(<span class="string">"Hello World!"</span>);
+     }
+    </code>
+    </pre>
+    </div>
+    </p>
+    <p>
+        Try to build and run. The output should be ...
+    </p>
+    <p> 
+    <div class="code-wrapper">
+    <pre>
+    <code class="cpp">
+    "BasicPlugin.exe" (Win32): Carregado "C:\Windows\System32\msctf.dll". 
+    HelloWorld!
+    </code>
+    </pre>
+    </div>
+    </p>
+                <p>
+                    Ok, that's great, but if we need perform tasks that need to be done or cotrolled in the main event loop? We can use the timerCallback method for this.<br>
+                    Let's print 'Hello World' every 1 second indefinitely. <br>
+                    Our class needs to inherit from the juce::Timer class, and we call the startTimer() method on initialise() and stopTimer() on systemRequestedQuit(), and then we implement the timerCallback() method.
+                </p>
+    <p> 
+        <div class="code-wrapper">
+        <pre>
+        <code class="cpp">
+        <span class="keyword">#include</span> <span class="include">&lt;JuceHeader.h&gt;</span>
+    
+        <span class="keyword">class</span> <span class="class">App</span> : juce::<span class="class">JUCEApplicationBase</span>, juce::<span class="class">Timer</span>
+        {   
+        <span class="keyword">public</span>:
+            &nbsp;<span class="function">App</span>() {}
+            // ...
+            &nbsp;<span class="keyword">void</span> <span class="function">initialise</span>(<span class="keyword">const</span> juce::<span class="class">String</span>&amp; commandLine) <span class="keyword">override</span> 
+             {
+                <span class="function">startTimer</span>(<span class="number">1000</span>);
+             }
+             
+            &nbsp;<span class="keyword">void</span> <span class="function">systemRequestedQuit</span>() <span class="keyword">override</span> 
+             { 
+                <span class="function">stopTimer</span>();
+                <span class="function">quit</span>();
+             }
+
+            &nbsp;<span class="keyword">void</span> <span class="function">timerCallback</span>() <span class="keyword">override</span> 
+             { 
+                juce::<span class="class">Logger</span>::<span class="function">writeToLog</span>(<span class="string">"Hello World!"</span>);
+             }
+            // ...
+        </code>
+        </pre>
+        </div>
+    </p>
+                <p>
+                    The output ...
+                </p>
+    <p> 
+        <div class="code-wrapper">
+        <pre>
+        <code class="cpp">
+            "BasicPlugin.exe" (Win32): Carregado "C:\Windows\System32\msctf.dll". 
+            HelloWorld!
+            HelloWorld!
+            HelloWorld!
+            HelloWorld!
+            HelloWorld!
+            HelloWorld!
+        </code>
+        </pre>
+        </div>
+    </p>
+            </section>
+            <section id="gui">
+                <h2>GUI</h2>
+                <p>
+                    To show something on the screen we can use something that inherits from JUCE's base class for all user-interface objects, the juce::Component. I will create a new class above our App class that inherits from DocumentWindow
+                    and declare an MainWindow attribute.
+                </p>
+    <p> 
+    <div class="code-wrapper">
+    <pre>
+    <code class="cpp">
+        <span class="keyword">class</span> <span class="class">MainWindow</span> : <span class="keyword">public</span> juce::<span class="class">DocumentWindow</span>
+        {
+        <span class="keyword">public</span>:
+            <span class="function">MainWindow</span>(juce::<span class="class">String</span> name)
+                : <span class="class">DocumentWindow</span>(name,
+                                juce::<span class="class">Desktop</span>::<span class="function">getInstance</span>().<span class="function">getDefaultLookAndFeel</span>()
+                                .<span class="function">findColour</span>(juce::<span class="class">ResizableWindow</span>::backgroundColourId),
+                                <span class="class">DocumentWindow</span>::allButtons)
+            {
+                <span class="function">setUsingNativeTitleBar</span>(<span class="keyword">true</span>);
+                <span class="function">setContentOwned</span>(<span class="keyword">new</span> <span class="class">Component</span>(), <span class="keyword">false</span>);
+
+                
+
+                <span class="function">setResizable</span>(<span class="keyword">true</span>, <span class="keyword">true</span>);
+                <span class="function">centreWithSize</span>(<span class="function">getWidth</span>(), <span class="function">getHeight</span>());
+
+
+                <span class="function">setVisible</span>(<span class="keyword">true</span>);
+            }
+
+            <span class="keyword">void</span> <span class="function">closeButtonPressed</span>() <span class="keyword">override</span>
+            {
+                juce::<span class="class">JUCEApplicationBase</span>::<span class="function">getInstance</span>()-><span class="function">systemRequestedQuit</span>();
+            }
+
+            <span class="keyword">private</span>:
+        };
+
+        <span class="keyword">class</span> <span class="class">App</span> : juce::<span class="class">JUCEApplicationBase</span>, juce::<span class="class">Timer</span>
+        {   
+        <span class="keyword">public</span>:
+            &nbsp;<span class="function">App</span>() {}
+            // ...
+
+            // ..
+        <span class="keyword">private</span>:
+            std::<span class="class">unique_ptr</span>&lt;<span class="class">MainWindow</span>&gt; myWindow;
+        };
+    </code>
+    </pre>
+    </div>
+    </p>
+
+                <p>
+                    In the initialise method, we have some set things to do.
+                </p>
+    <p> 
+        <div class="code-wrapper">
+        <pre>
+        <code class="cpp">
+        // ...
+        <span class="keyword">void</span> <span class="function">initialise</span>(<span class="keyword">const</span> juce::<span class="class">String</span>&amp; commandLine) <span class="keyword">override</span> 
+        {
+            myWindow.<span class="function">reset</span>(<span class="keyword">new </span><span class="class">myWindow</span>(<span class="function">getApplicationName</span>()));
+            myWindow-&gt;<span class="function">setBounds</span>(0, 0, 600, 400);
+           <!-- myWindow-&gt;<span class="function">setVisible</span>(<span class="keyword">true</span>); -->
+            <span class="function">startTimer</span>(<span class="number">1000</span>);
+        }
+
+        <span class="keyword">void</span> <span class="function">shutdown</span>() <span class="keyword">override</span> 
+        {
+            myWindow = <span class="keyword">nullptr</span>;
+        }
+        // ...
+        </code>
+        </pre>
+        </div>
+    </p>
+
+                <p>
+                    After build, should look like this
+                </p>
+                <div class="image-wrapper">
+                    <label for=""></label><img src="../resources/JUCE_Basics_Resources/AppWindow.png" alt=""><br>App Window</label>
+                </div>
+                <p>
+                    Let's show some text. <br>
+                    We are going to speed up our workflow a little, go to Projucer. <br>
+                    Expand File Explorer > Right click Source group > Add New Component class (split between a CPP &amp; header) > Give it a name (I will name it MyComponent) <br>
+                    Don't forget to "Save the project" (ctrl + p). <br>
+                    In our Main.cpp ...
+                </p>
+    <p>
+        <div class="code-wrapper">
+        <pre>
+        <code class="cpp">
+        <span class="keyword">#include</span> <span class="include">&lt;JuceHeader.h&gt;</span>
+        <span class="keyword">#include</span> <span class="include">"MyComponent.h"</span>
+        </code>
+        </pre>
+        </div>
+    </p>
+                <p>
+                    Just change the setContentOwned argument from our MainWindow class
+                </p>
+    <p>
+        <div class="code-wrapper">
+        <pre>
+        <code class="cpp">
+        <span class="function">setContentOwned</span>(<span class="keyword">new</span> <span class="class">MyComponent</span>(), <span class="keyword">false</span>);
+        </code>
+        </pre>
+        </div>
+    </p>
+                <p>
+                    Open MyComponent.cpp and go to the paint method and change the string argument to "Hello World!".
+                </p>
+    <p>
+        <div class="code-wrapper">
+        <pre>
+        <code class="cpp">
+        g.<span class="function">drawText</span>(<span class="string">"Hello World!"</span>, <span class="function">getLocalBounds</span>(),
+        juce::<span class="class">Justification</span>::centred, <span class="keyword">true</span>);   <span class="comment">// draw some placeholder text</span>
+        </code>
+        </pre>
+        </div>
+    </p>
+                <p>
+                    After build, should look like this
+                </p>
+                <div class="image-wrapper">
+                    <label for=""></label><img src="../resources/JUCE_Basics_Resources/AppWindowHelloWorld.png" alt=""><br>App Window</label>
+                </div>
+                <p>
+                    And we are done. As an exercise, try to write using the juce::Label.
+                </p>
+            </section>
+
+        </main>
+
+        <footer>
+        <p>Copyright 2023 InSine Audio All rights reserved.</p>
+        </footer>
+    </body>
+</html>
