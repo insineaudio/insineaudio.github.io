@@ -5,7 +5,8 @@
         <meta charset="UTF-8">
         <!-- Article title -->
         <title>Basic Plugin Tutorial Part-1</title>
-        <link rel="stylesheet" href="https://insineaudio.github.io/styles/JUCE_Basics.css">
+        <!--<link rel="stylesheet" href="https://insineaudio.github.io/styles/JUCE_Basics.css">-->
+        <link rel="stylesheet" href="/styles/JUCE_Basics.css">
     </head>
     <body>
         <header>
@@ -31,14 +32,14 @@
                     the "Basic Plugin" template, from Projucer.
                 </p>
                 <p>
-                    We are going to start with a JUCE Gui application, and then change the Projucer project to a Plugin project.
+                    In this first part we are going to begin with a JUCE GUI application, and subsequently change the Projucer project to a Plugin project.
                 </p>
             </section>
             <section id="creatingtheproject" class="main-section">
                 <h2>Creating the project</h2>
                 <p>
                     Open the Projucer > New Project > Application > Blank.<br>
-                    Then give it the project name, a will name it "BasicPlugin".<br>
+                    Then give it the project name,  I will name it "BasicPlugin".<br>
                     Expand the modules tab, we can see that a few modules are checked.<br>
                     Check if the modules path are correct. <br>
                     Select your exporter and create the project. <br>
@@ -69,13 +70,19 @@
                         <li>Make sure to expand the file explorer</li>
                         <li>Right click on Source folder (called Group in Projucer)</li>
                         <li>Then, select "Add New CPP File"</li>
-                        <li>Give it a name, in my case I will give the name "Main"</li>
+                        <li>Give it a name, in my case I will name it "Main"</li>
                         <li>Go to File > Save Project or use shortcut "ctrl + p"</li>
                     </ul>
-                    An empty .cpp file will be created on Source folder, take a look at the project's folder.<br>
-                    Now, we open our selected exporter, in this case within Projucer. I will open Visual Studio.<br><br>
+                </p>
+                <p>
+                    A blank .cpp file will be created on Source folder. Check the project's folder.<br>
+                    Next, we'll open our chosen exporter, in this case within Projucer. I will open Visual Studio.<br>
+                    <div class="image-wrapper">
+                        <img src="../resources/JUCE_Basics_Resources/OpenVSInsideProjucer.png" alt="">
+                    </div> <br>
                     The "Blank" template, creates a blank JUCE GUI application.<br>
                     Replace the "#include"
+                </p>
     <div class="code-wrapper">
     <pre>
     <code class="cpp">
@@ -83,8 +90,9 @@
     <span class="keyword">#include</span> <span class="include">&lt;JuceHeader.h&gt;</span> <span class="comment">// Replace for this</span>
     </code>
     </pre>
-    </div>
+    </div>      <p>
                     To start our JUCE GUI application (not a plugin yet) we need to use a macro "START_JUCE_APPLICATION()"
+                </p>
     <div class="code-wrapper">
     <pre>
     <code class="cpp">
@@ -107,8 +115,8 @@
                         Let's jump one more time on that class ...
                     </p>
                     <p>
-                        Now we can see how the class is defined, many comments to read at this point, and the main() function with a comment above saying that it is for    
-                        internal use only, we are going to stop diving on JUCE intrinsics for now.
+                        Now we can see how the class is defined, there are many comments to read at this point, and the main() function with a comment above saying that it is for    
+                        internal use only.  We're going to stop looking at the JUCE details for now.
                     </p>
                 </p>
             </section>
@@ -116,7 +124,7 @@
                 <h2>The JUCE Application Base Class</h2>
                 <p>
                     This first big comment above the class definition, it is exactly the same of the 
-                    <a href="https://docs.juce.com/master/classJUCEApplicationBase.html#details" target="_blank">detailed description</a> of this class on the documentation.<br>
+                    <a href="https://docs.juce.com/master/classJUCEApplicationBase.html#details" target="_blank">detailed description</a> of this class in the documentation.<br>
                     <br>
                     "Any application that wants to run an event loop must declare a subclass of <br>
                     JUCEApplicationBase, and implement its various pure virtual methods.        <br>
